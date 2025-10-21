@@ -3,65 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crypto Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
 </head>
 <body>
     <!-- NAV -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">
-            <span style="color:var(--accent)">●</span> Crypto Dashboard
-            <small class="ms-2 text-secondary">Coinlore</small>
-        </a>
-        <div class="d-flex gap-2">
-            <button id="btnReload" class="btn btn-sm btn-outline-secondary btn-refresh">
-            Recargar datos
-            </button>
-        </div>
+            <a class="navbar-brand fw-bold" href="#">
+                <span style="color:var(--accent)">●</span> Crypto Dashboard
+                <small class="ms-2 text-secondary">Coinlore</small>
+            </a>
+            <div class="d-flex gap-2">
+                <button id="btnReload" class="btn btn-sm btn-outline-secondary btn-refresh">Recargar datos</button>
+            </div>
         </div>
     </nav>
 
     <main class="container my-4">
-        <!-- Charts -->
-        <div class="row g-3 mt-1">
+
+        <!-- INFO SUPERIOR -->
+        <div class="row mb-3" id="infoTop"></div>
+
+        <!-- GRAFICOS -->
+        <div class="row g-3 mb-4">
             <div class="col-12 col-lg-6">
                 <div class="card p-3">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
                         <h6 class="mb-0">Top 10 Coins</h6>
                         <div class="d-flex align-items-center gap-2">
-                        <small id="lastUpdatedCoin" class="muted">—</small>
-                        <div id="spinCoin" class="spinner-border text-secondary spinner d-none" role="status"></div>
+                            <small id="lastUpdatedCoin" class="muted">—</small>
+                            <div id="spinCoin" class="spinner-border text-secondary spinner d-none" role="status"></div>
                         </div>
                     </div>
-                    <div class="chart-container mt-3">
+                    <div class="chart-container mt-2">
                         <canvas id="chartCoin"></canvas>
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-lg-6">
                 <div class="card p-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Top 10 Exchanges por Volumen (USD)</h6>
-                    <div class="d-flex align-items-center gap-2">
-                    <small id="lastUpdatedExchanges" class="muted">—</small>
-                    <div id="spinExchanges" class="spinner-border text-secondary spinner d-none" role="status"></div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Top 10 Exchanges por Volumen (USD)</h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <small id="lastUpdatedExchanges" class="muted">—</small>
+                            <div id="spinExchanges" class="spinner-border text-secondary spinner d-none" role="status"></div>
+                        </div>
+                    </div>
+                    <div class="chart-container mt-2">
+                        <canvas id="chartExchanges"></canvas>
                     </div>
                 </div>
-                <div class="chart-container mt-3">
-                    <canvas id="chartExchanges"></canvas>
-                </div>
+            </div>
+        </div>
+
+        <!-- TABLAS INDEPENDIENTES -->
+        <div class="row g-3">
+            <!-- Tabla Coins -->
+            <div class="col-12 col-lg-6">
+                <div class="card p-3">
+                    <h6>Tabla de Coins</h6>
+                    <input id="searchCoins" class="form-control my-2" placeholder="Buscar moneda...">
+                    <div class="table-responsive mt-2">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Nombre</th>
+                                    <th>Symbol</th>
+                                    <th>Precio (USD)</th>
+                                    <th>Market Cap</th>
+                                </tr>
+                            </thead>
+                            <tbody id="coinsTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-          
+
+            <!-- Tabla Exchanges -->
+            <div class="col-12 col-lg-6">
+                <div class="card p-3">
+                    <h6>Tabla de Exchanges</h6>
+                    <input id="searchExchanges" class="form-control my-2" placeholder="Buscar exchange...">
+                    <div class="table-responsive mt-2">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Nombre</th>
+                                    <th>Base</th>
+                                    <th>Quote</th>
+                                    <th>Volumen (USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="exchangesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <script src="/js/script.js"></script>
 </body>
 </html>
